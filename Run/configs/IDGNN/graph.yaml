@@ -1,0 +1,79 @@
+#out_dir: ../results/Comparative_experiment/My_method/Five
+#out_dir: /data/yuanyz/results/test_experiment/LoadImg
+out_dir: /data0/yuanyz/NewGraph/results/12_layer
+#out_dir: ../results/Arugment
+dataset:
+  format: dglmulty #dglmulty  dglbatch dgl LoadImg deepsnap
+  name: patientminimum_spanning_tree256412 #patientminimum_spanning_tree256412 #TCGA
+  # name: data
+  task: graph
+  multitasking: False
+  feature_dim: 6
+  subtaskdim: 7
+  augment_split: 1   #将一个病人分为多少子病人
+  task_type: regression  #classification2regression  # regression
+  transductive: False
+  split: [ 0.8,0.1,0.1 ]
+  #augment_feature: ['node_identity']
+  augment_feature: [ ]
+  augment_feature_dims: [ 0 ]
+  augment_feature_repr: position
+  augment_label: None
+  augment_label_dims: 0
+  transform: None
+train:
+  auto_resume: False    #是否使用预训练
+  epoch_resume: 999
+  #resume_path: /data/yuanyz/results/test/patientDelaunay256412/dglmulty/attention_msg1/graph_grid_graph/graph-l_mp=2-pairnorm=True-dropout=0.8-dim=24-stage=stack-pool=Transformer-name=patientDelaunay256412/42/   #预训练模型的路径
+  #resume_path: /data/yuanyz/results/test/patientDelaunay256412/dglmulty/attention_msg1/graph_grid_graph/graph-l_mp=10-pairnorm=True-dropout=0.7-dim=16-stage=stack-pool=GAT-name=patientDelaunay256412/42/
+#  resume_path: /data/yuanyz/results/test/patientDelaunay256412/dglmulty/patientminimum_spanning_tree256412_only_ration/graph/42
+
+#  resume_path: /data/yuanyz/results/test/patientDelaunay256412/dglmulty/patientminimum_spanning_tree256412_only_ration/graph/42
+  batch_size: 32
+  eval_period: 10
+  ckpt_period: 100
+  ckpt_clean: False
+  pca: -1
+model:
+  type: gnn
+  loss_fun: cox # CensoredCrossEntropyLoss # cox multi_task
+  edge_decoding: dot
+  graph_pooling: patch_mean
+  attention: True
+  rnn_layer: Transformer  #Transformer  LSTM GRU ATTENTION_LSTM GAT HyperGraph
+  Cluster: False
+  Cluster_epoch: 100
+  Cluster_layer_num: 2
+  Cluster_dim: 64
+  n_Cluster: 3
+  use_pairnorm: False
+
+  p_value: 0.1
+
+transformer:
+  num_layers: 2
+  num_heads: 4
+  feedforward_size: 512
+  dropout_rate: 0.1
+
+gnn:
+  layers_pre_mp: 1
+  layers_mp: 12
+  layers_post_mp: 1
+  dim_inner: 16
+  #layer_type: gatidconv
+  layer_type: idconv
+  stage_type: stack
+  #stage_type: GNNStackdifStage
+  batchnorm: True
+  act: lrelu_01
+  dropout: 0.6
+  agg: add
+  normalize_adj: True
+  l2norm: True
+  DeepsurvUse: False
+optim:
+  optimizer: adam
+  # base_lr: 0.0005
+  base_lr: 0.001
+  max_epoch: 1000
