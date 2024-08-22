@@ -37,10 +37,31 @@ The `GraphLab` directory is organized into several key components:
 
 - **train.py**: The main training script that integrates all the components and runs the model training process. This script ties together the data loading, model, optimizer, and loss functions.
 
+The `Run` directory in this repository contains essential components and scripts required for executing various graph-based machine learning experiments. Below is a breakdown of the contents:
+
+## Directory Structure
+
+### `CreateGraph/`
+This folder contains scripts or modules responsible for the creation and manipulation of graph data structures. It includes functionalities for:
+- Generating graphs
+- Defining nodes and edges
+- Constructing specific types of graphs used in the model or experiments
+
+### `configs/`
+This directory stores configuration files (such as YAML or JSON) that define parameters and settings for different runs or experiments. The configuration files allow for:
+- Easy modification of experiment parameters
+- Replication of experiments with different settings without altering the codebase
+
+### `dataloader.py`
+This script is responsible for loading and preprocessing the data used in experiments. 
+
+
+### `main.py`
+The `main.py` file serves as the entry point for running the model or experiments. 
+- Set up the experiment
+- Initialize the model
+- Execute the training and evaluation processes
+
 ## Getting Started
-
-To get started with this repository, clone the repository and follow the instructions provided in the `README.md` file. You'll find detailed guides on setting up your environment, preparing your data, and running experiments with the models provided.
-
-We hope this repository helps you in your research and development of graph-based models. If you encounter any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
 
 Happy coding!
