@@ -62,6 +62,10 @@ The `main.py` file serves as the entry point for running the model or experiment
 - Initialize the model
 - Execute the training and evaluation processes
 
+## Dataset
+We utilize the TCGA-LIHC dataset for our experiments. You can download the dataset from the following cloud storage address:
+Cloud Storage Address: https://pan.baidu.com/s/12l-pDBlOxUtTK5EVQU4QVw?pwd=ve85 
+Extract code：ve85 
 ## Getting Started
 
 Happy coding!
